@@ -1,44 +1,27 @@
-# My Assistant: Comprehensive Personal Productivity Suite (JavaBasics_Task_538_V0.1)
-## 📖 Description
-My Assistant is a multi-functional desktop application built upon principles of clean architecture and modularity. The project integrates task management capabilities with a specialized utility suite for daily computations, including a calculator, currency converter, and weather monitoring. Developed using Java Swing, the application adheres to strict separation of concerns—Service Layer for business logic, Repository Pattern for data access, and an MVP/MVC structure for the presentation layer—ensuring high stability and comprehensive testability.
+# Universal Server Initialization - setting up the core Spring Boot application, configuring PostgreSQL database connectivity, and establishing the foundational server architecture.
+# Description
+This project represents the successful creation and initialization of a universal server backend from scratch using Spring Boot and PostgreSQL. It establishes the core application architecture, integrates Spring Data JPA for data management, and sets up a robust foundation for building scalable backend services.
 
-## 📋 Requirements Compliance
-Custom Viewport Renderer Isolation: Implemented a dedicated TaskCellRenderer in the ui.renderers package to support advanced list element interaction.
+## Requirements Compliance
+- Java 23 runtime configuration.
+- Spring Boot 3.3.0 enterprise starter stack.
+- PostgreSQL database integration via HikariCP connection pooling.
+- Clean Code architecture and proper package structuring.
 
-Isolated Statistics Footer: Extracted the bottom metric panel into a standalone TaskFooterPanel within the ui.components package.
+## Architectural Stack
+- **Language:** Java 23
+- **Framework:** Spring Boot 3.3.0
+- **Data Access:** Spring Data JPA, Hibernate ORM
+- **Database:** PostgreSQL
+- **Build Tool:** Maven
 
-Strict Interface Localization: Enforced standard assets across all labels, tooltips, and interactive components.
+## Implementation Details
+- Built the foundational server entry point (`MyUniversalServerApplication`) from scratch.
+- Configured application properties for seamless database communication.
+- Implemented core domain models and repository layers to handle server-side data operations.
 
-Zero Designer Workspace Alignment: Constructed all modular UI layout adapters manually, avoiding dependency on GUI Form builders.
-
-Testing: Achieved full unit test coverage for the business logic and service layers.
-
-## 🚀 Architectural Stack
-Language: Java 23+
-
-UI Framework: Java Swing (Manual Layout Management)
-
-Data Persistence: Jackson (JSON serialization)
-
-Testing: JUnit 5 (Unit testing suite)
-
-Build Tool: Maven
-
-## 🏗️ Implementation Details
-Clean Architecture: All business processes are encapsulated within the service.impl package and verified by comprehensive unit tests.
-
-UI-Logic Separation: Presentation logic (filtering, sorting, rendering) is strictly decoupled from the UI components, enabling high modularity.
-
-Scalability: The application utilizes Repository and Factory patterns, allowing for seamless integration of new data sources or task types.
-
-AI Chat (Experimental): This module is reserved for future integrations. The current architecture allows for the implementation of external LLM service wrappers or local model clients. Development is currently deferred to prioritize high-value user features over standard web-based AI interfaces.
-
-## 📋 Expected result
-Upon launching the application, the user is presented with a tabbed interface providing quick access to tasks and integrated tools. The UI supports dynamic state updates, ensuring that filtering configurations and task management actions are reflected instantly in the viewport.
-
-## 📚 UML Diagram:
-![MyAssistantDiagram](src/main/resources/images/MyAssistantDiagram.png)
-
+## Expected result
+The universal server successfully initializes, binds to port 8080, establishes a stable connection with PostgreSQL, and runs error-free with active request handling capabilities.
 ### Project Structure:
 
     JavaBasics_Task_538/
@@ -157,34 +140,17 @@ Upon launching the application, the user is presented with a tabbed interface pr
 ```java
 package com.yurii.pavlenko.app;
 
-import controller.main.com.yurii.pavlenko.TaskController;
-import repository.main.com.yurii.pavlenko.TaskRepository;
-import impl.repository.main.com.yurii.pavlenko.InMemoryTaskRepositoryImpl;
-// import impl.repository.main.com.yurii.pavlenko.JsonTaskRepositoryImpl;
-// import impl.repository.main.com.yurii.pavlenko.DatabaseTaskRepositoryImpl;
-import service.main.com.yurii.pavlenko.TaskService;
-import impl.service.main.com.yurii.pavlenko.TaskServiceImpl;
-import frames.ui.main.com.yurii.pavlenko.TaskFrame;
-import util.main.com.yurii.pavlenko.Util;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import javax.swing.*;
-
-public class MyAssistantApp {
-
+@SpringBootApplication
+@EnableJpaRepositories(basePackages = "com.yurii.pavlenko.assistant.tasks.repositories")
+@EntityScan(basePackages = "com.yurii.pavlenko.assistant.tasks.models.entity")
+public class MyUniversalServerApplication {
     public static void main(String[] args) {
-
-        Util.configureLookAndFeel();
-        Util.configureGlobalFonts();
-
-        TaskRepository repo = new InMemoryTaskRepositoryImpl();
-
-        // TaskRepository repo = new JsonTaskRepositoryImpl();
-        // TaskRepository repo = new DatabaseTaskRepositoryImpl();
-
-        TaskService service = new TaskServiceImpl(repo);
-        TaskController controller = new TaskController(service);
-
-        SwingUtilities.invokeLater(() -> new TaskFrame(controller));
+        SpringApplication.run(MyUniversalServerApplication.class, args);
     }
 }
 ```
