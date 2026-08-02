@@ -1,4 +1,4 @@
-# Universal Server Initialization - setting up the core Spring Boot application, configuring PostgreSQL database connectivity, and establishing the foundational server architecture.
+# Standard JPA Server Initialization - setting up the core Spring Boot application, configuring PostgreSQL database connectivity, and establishing the foundational server architecture.
 # Description
 This project represents the successful creation and initialization of a universal server backend from scratch using Spring Boot and PostgreSQL. It establishes the core application architecture, integrates Spring Data JPA for data management, and sets up a robust foundation for building scalable backend services.
 
