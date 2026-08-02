@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>com.yurii.pavlenko</groupId>
-    <artifactId>MyUniversalServer</artifactId>
+    <artifactId>StandardJPAApp</artifactId>
     <version>0.1</version>
 
     <properties>
